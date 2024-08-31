@@ -79,6 +79,13 @@ getTokenAmount(String message) {
   return newLine;
 }
 
+formatCashAmount(int cash) {
+  NumberFormat formatter = NumberFormat.decimalPattern();
+  String formattedNumber = formatter.format(cash);
+
+  return formattedNumber;
+}
+
 formatDate(String timestamp) {
   try {
     DateTime parsedDateTime = DateTime.parse(timestamp);

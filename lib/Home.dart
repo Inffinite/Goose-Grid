@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -130,7 +131,7 @@ class _HomeState extends ConsumerState<Home> {
                               ),
                               const SizedBox(width: 10.0),
                               Text(
-                                '${ref.watch(goosegridState).powerSpendingThisMonth}',
+                                '${formatCashAmount(ref.watch(goosegridState).powerSpendingThisMonth)}',
                                 style: const TextStyle(
                                   fontSize: 45.0,
                                   color: Color(0xffE9F5DB),
@@ -478,8 +479,11 @@ class _HomeState extends ConsumerState<Home> {
                                                               fontFamily:
                                                                   'SFREGULAR',
                                                               fontSize: 12.0,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                0.5,
+                                                              ),
                                                             ),
                                                           ),
                                                           Text(
@@ -505,8 +509,11 @@ class _HomeState extends ConsumerState<Home> {
                                                               fontFamily:
                                                                   'SFREGULAR',
                                                               fontSize: 12.0,
-                                                              color:
-                                                                  Colors.white,
+                                                              color: Colors
+                                                                  .white
+                                                                  .withOpacity(
+                                                                0.5,
+                                                              ),
                                                             ),
                                                           ),
                                                           Text(
@@ -570,6 +577,191 @@ class TransactionCard extends StatefulWidget {
 }
 
 class _TransactionCardState extends State<TransactionCard> {
+  infoModal(context, date, units, paidAmount, charges, tokenAmount) {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        top: Radius.circular(15.0),
+      )),
+      isScrollControlled: true,
+      backgroundColor: Color(0xff606F49),
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, StateSetter setState) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 30.0,
+                        height: 4.0,
+                        margin: EdgeInsets.only(top: 15.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50.0),
+                          color: Color(0xffE9F5DB),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20.0),
+                  Container(
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        '${date}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Color(0xffE9F5DB),
+                          fontSize: 14.0,
+                          fontFamily: 'SFBOLD',
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10.0),
+                  Container(
+                    width: double.infinity,
+                    // margin: const EdgeInsets.only(
+                    //   bottom: 20.0,
+                    // ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 0.0,
+                      vertical: 10.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xffE9F5DB),
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'UNITS',
+                                    style: TextStyle(
+                                      fontFamily: 'SFREGULAR',
+                                      fontSize: 12.0,
+                                      color: Color(0xff606F49),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${units}',
+                                    style: TextStyle(
+                                      fontFamily: 'SFBOLD',
+                                      color: Color(0xff606F49),
+                                      fontSize: 25.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'PAID AMOUNT',
+                                    style: TextStyle(
+                                      fontFamily: 'SFREGULAR',
+                                      fontSize: 12.0,
+                                      color: Color(0xff606F49),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${paidAmount}',
+                                    style: TextStyle(
+                                      fontFamily: 'SFBOLD',
+                                      color: Color(0xff606F49),
+                                      fontSize: 25.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          color: Color(0xff606F49).withOpacity(0.2),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20.0,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'OTHER CHARGES',
+                                    style: TextStyle(
+                                      fontFamily: 'SFREGULAR',
+                                      fontSize: 12.0,
+                                      color: Color(0xff606F49),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${charges}',
+                                    style: TextStyle(
+                                      fontFamily: 'SFBOLD',
+                                      color: Color(0xff606F49),
+                                      fontSize: 25.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'AMOUNT USED',
+                                    style: TextStyle(
+                                      fontFamily: 'SFREGULAR',
+                                      fontSize: 12.0,
+                                      color: Color(0xff606F49),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${tokenAmount}',
+                                    style: TextStyle(
+                                      fontFamily: 'SFBOLD',
+                                      color: Color(0xff606F49),
+                                      fontSize: 25.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10.0),
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -585,92 +777,104 @@ class _TransactionCardState extends State<TransactionCard> {
         child: Column(
           children: [
             for (Map<String, dynamic> item in widget.e)
-              Container(
-                width: double.infinity,
-                // margin: const EdgeInsets.only(
-                //   bottom: 20.0,
-                // ),
-                padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                decoration: BoxDecoration(
-                  color: const Color(0xffE9F5DB),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Divider(
-                      color: Color.fromARGB(66, 85, 99, 64),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
+              InkWell(
+                onTap: () {
+                  infoModal(
+                    context,
+                    formatDate(item['date'].toString()),
+                    getUnits(item['body']),
+                    getCashAmount(item['body']),
+                    getOtherCharges(item['body']),
+                    getTokenAmount(item['body']),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  // margin: const EdgeInsets.only(
+                  //   bottom: 20.0,
+                  // ),
+                  padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                  decoration: BoxDecoration(
+                    color: const Color(0xffE9F5DB),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Divider(
+                        color: Color.fromARGB(66, 85, 99, 64),
                       ),
-                      child: Text(
-                        '${formatDate(item['date'].toString())}',
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          color: Color(0xff606F49),
-                          fontSize: 12.0,
-                          fontFamily: 'SFBOLD',
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                        ),
+                        child: Text(
+                          '${formatDate(item['date'].toString())}',
+                          textAlign: TextAlign.start,
+                          style: const TextStyle(
+                            color: Color(0xff606F49),
+                            fontSize: 12.0,
+                            fontFamily: 'SFBOLD',
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 5.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0,
+                      SizedBox(height: 5.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0,
+                        ),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'UNITS',
+                                    style: TextStyle(
+                                      fontFamily: 'SFREGULAR',
+                                      fontSize: 12.0,
+                                      color: Color(0xff606F49),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${getUnits(
+                                      item['body'],
+                                    )}',
+                                    style: TextStyle(
+                                      fontFamily: 'SFBOLD',
+                                      color: Color(0xff606F49),
+                                      fontSize: 22.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    'PAID AMOUNT',
+                                    style: TextStyle(
+                                      fontFamily: 'SFREGULAR',
+                                      fontSize: 12.0,
+                                      color: Color(0xff606F49),
+                                    ),
+                                  ),
+                                  Text(
+                                    '${getCashAmount(
+                                      item['body'],
+                                    )}',
+                                    style: TextStyle(
+                                      fontFamily: 'SFBOLD',
+                                      color: Color(0xff606F49),
+                                      fontSize: 22.0,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ]),
                       ),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'UNITS',
-                                  style: TextStyle(
-                                    fontFamily: 'SFREGULAR',
-                                    fontSize: 12.0,
-                                    color: Color(0xff606F49),
-                                  ),
-                                ),
-                                Text(
-                                  '${getUnits(
-                                    item['body'],
-                                  )}',
-                                  style: TextStyle(
-                                    fontFamily: 'SFBOLD',
-                                    color: Color(0xff606F49),
-                                    fontSize: 22.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  'PAID AMOUNT',
-                                  style: TextStyle(
-                                    fontFamily: 'SFREGULAR',
-                                    fontSize: 12.0,
-                                    color: Color(0xff606F49),
-                                  ),
-                                ),
-                                Text(
-                                  '${getCashAmount(
-                                    item['body'],
-                                  )}',
-                                  style: TextStyle(
-                                    fontFamily: 'SFBOLD',
-                                    color: Color(0xff606F49),
-                                    fontSize: 22.0,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ]),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
           ],

@@ -30,3 +30,6 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
+
+// color pallete
+// https://coolors.co/e9f5db-dcebca-cfe1b9-c2d5aa-b5c99a-a6b98b-97a97c-849669-728359-606f49
