@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goosegrid/Functions.dart';
 import 'package:goosegrid/Insight.dart';
+import 'package:goosegrid/Settings.dart';
 import 'package:goosegrid/riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -49,9 +50,41 @@ class _HomeState extends ConsumerState<Home> {
         child: Scaffold(
           backgroundColor: const Color(0xff606F49),
           appBar: AppBar(
+            surfaceTintColor: Colors.black,
+            // leading: Container(
+            //   margin: EdgeInsets.only(left: 20.0),
+            //   child: IconButton(
+            //     padding: EdgeInsets.all(10.0),
+            //     onPressed: () {
+            //       // Navigator.pop(context);
+            //     },
+            //     icon: Icon(
+            //       CupertinoIcons.bolt_fill,
+            //       size: 24.0,
+            //       color: Color(0xffE9F5DB),
+            //     ),
+            //   ),
+            // ),
             leading: Container(),
             // actions: [
-            //   IconButton(onPressed: (){}, icon: icon)
+            //   Container(
+            //     margin: EdgeInsets.only(right: 20.0),
+            //     child: IconButton(
+            //       padding: EdgeInsets.all(5.0),
+            //       onPressed: () {
+            //         Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //             builder: (context) => const Settings(),
+            //           ),
+            //         );
+            //       },
+            //       icon: Icon(
+            //         CupertinoIcons.settings_solid,
+            //         color: Color(0xffE9F5DB),
+            //       ),
+            //     ),
+            //   ),
             // ],
             backgroundColor: const Color(0xff606F49),
             title: InkWell(
@@ -70,46 +103,46 @@ class _HomeState extends ConsumerState<Home> {
             ),
             centerTitle: true,
           ),
-          bottomNavigationBar: NavigationBarTheme(
-            data: NavigationBarThemeData(
-              labelTextStyle: WidgetStateProperty.all(
-                const TextStyle(
-                    color: Color(0xffE9F5DB),
-                    fontSize: 12.0,
-                    fontFamily: 'SFBOLD'),
-              ),
-            ),
-            child: NavigationBar(
-              selectedIndex: selectedPage,
-              onDestinationSelected: (int index) {
-                setState(() {
-                  selectedPage = index;
-                });
-              },
-              indicatorColor: const Color(0xffE9F5DB),
-              backgroundColor: const Color(0xff606F49),
-              destinations: [
-                NavigationDestination(
-                  selectedIcon: const Icon(
-                    Icons.change_history_rounded,
-                    color: Color(0xff606F49),
-                  ),
-                  icon: Icon(Icons.change_history_outlined,
-                      color: const Color(0xffE9F5DB).withOpacity(0.5)),
-                  label: 'Transactions',
-                ),
-                NavigationDestination(
-                  selectedIcon: const Icon(
-                    Icons.dashboard,
-                    color: Color(0xff606F49),
-                  ),
-                  icon: Icon(Icons.dashboard_outlined,
-                      color: const Color(0xffE9F5DB).withOpacity(0.5)),
-                  label: 'Insights',
-                ),
-              ],
-            ),
-          ),
+          // bottomNavigationBar: NavigationBarTheme(
+          //   data: NavigationBarThemeData(
+          //     labelTextStyle: WidgetStateProperty.all(
+          //       const TextStyle(
+          //           color: Color(0xffE9F5DB),
+          //           fontSize: 12.0,
+          //           fontFamily: 'SFBOLD'),
+          //     ),
+          //   ),
+          //   child: NavigationBar(
+          //     selectedIndex: selectedPage,
+          //     onDestinationSelected: (int index) {
+          //       setState(() {
+          //         selectedPage = index;
+          //       });
+          //     },
+          //     indicatorColor: const Color(0xffE9F5DB),
+          //     backgroundColor: const Color(0xff606F49),
+          //     destinations: [
+          //       NavigationDestination(
+          //         selectedIcon: const Icon(
+          //           Icons.change_history_rounded,
+          //           color: Color(0xff606F49),
+          //         ),
+          //         icon: Icon(Icons.change_history_outlined,
+          //             color: const Color(0xffE9F5DB).withOpacity(0.5)),
+          //         label: 'Transactions',
+          //       ),
+          //       NavigationDestination(
+          //         selectedIcon: const Icon(
+          //           Icons.dashboard,
+          //           color: Color(0xff606F49),
+          //         ),
+          //         icon: Icon(Icons.dashboard_outlined,
+          //             color: const Color(0xffE9F5DB).withOpacity(0.5)),
+          //         label: 'Insights',
+          //       ),
+          //     ],
+          //   ),
+          // ),
           body: SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -151,13 +184,13 @@ class _HomeState extends ConsumerState<Home> {
                               ),
                             ],
                           ),
-                          const SizedBox(height: 15.0),
+                          const SizedBox(height: 10.0),
                           Container(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 5.0),
+                                horizontal: 20.0, vertical: 10.0),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50.0),
-                              color: const Color(0xffE9F5DB).withOpacity(0.15),
+                              color: const Color(0xffE9F5DB).withOpacity(0.05),
                             ),
                             child: const Row(
                               mainAxisSize: MainAxisSize.min,
@@ -181,231 +214,6 @@ class _HomeState extends ConsumerState<Home> {
                             ),
                           ),
                           const SizedBox(height: 30.0),
-                          // Column(
-                          //   children: [
-                          //     ref.watch(goosegridState).messages.isNotEmpty
-                          //         ? ListView.builder(
-                          //             physics:
-                          //                 const NeverScrollableScrollPhysics(),
-                          //             shrinkWrap: true,
-                          //             itemCount: ref
-                          //                 .watch(goosegridState)
-                          //                 .messages
-                          //                 .length,
-                          //             itemBuilder: (context, i) {
-                          //               return ref
-                          //                           .watch(goosegridState)
-                          //                           .messages[i]
-                          //                           .body
-                          //                           .toString()[0] ==
-                          //                       "M"
-                          //                   ? Container(
-                          //                       margin: const EdgeInsets.only(
-                          //                           bottom: 15.0),
-                          //                       // padding: EdgeInsets.all(15.0),
-                          //                       decoration: BoxDecoration(
-                          // color:
-                          //     const Color(0xffE9F5DB),
-                          //                         borderRadius:
-                          //                             BorderRadius.circular(
-                          //                                 10.0),
-                          //                       ),
-                          //                       child: Column(
-                          //                         crossAxisAlignment:
-                          //                             CrossAxisAlignment.start,
-                          //                         children: [
-                          //                           const SizedBox(
-                          //                               height: 15.0),
-                          //                           Padding(
-                          //                             padding: const EdgeInsets
-                          //                                 .symmetric(
-                          //                               horizontal: 20.0,
-                          //                             ),
-                          //                             child: Text(
-                          // '${formatDate(
-                          //   ref
-                          //       .watch(
-                          //           goosegridState)
-                          //       .messages[i]
-                          //       .date
-                          //       .toString(),
-                          // )}',
-                          //                               style: const TextStyle(
-                          //                                 color:
-                          //                                     Color(0xff606F49),
-                          //                                 fontSize: 12.0,
-                          //                                 fontFamily:
-                          //                                     'SFREGULAR',
-                          //                               ),
-                          //                             ),
-                          //                           ),
-                          //                           const SizedBox(height: 8.0),
-                          //                           Container(
-                          //                             width: double.infinity,
-                          //                             height: 1.0,
-                          //                             color: const Color(
-                          //                                     0xff606F49)
-                          //                                 .withOpacity(0.3),
-                          //                           ),
-                          //                           const SizedBox(height: 8.0),
-                          //                           Padding(
-                          //                             padding: const EdgeInsets
-                          //                                 .symmetric(
-                          //                               horizontal: 20.0,
-                          //                             ),
-                          //                             child: Row(
-                          //                               mainAxisAlignment:
-                          //                                   MainAxisAlignment
-                          //                                       .spaceBetween,
-                          //                               children: [
-                          //                                 Column(
-                          //                                   // mainAxisAlignment:
-                          //                                   //     MainAxisAlignment.spaceBetween,
-                          //                                   crossAxisAlignment:
-                          //                                       CrossAxisAlignment
-                          //                                           .start,
-                          //                                   children: [
-                          //                                     const Text(
-                          //                                       'UNITS',
-                          //                                       style:
-                          //                                           TextStyle(
-                          //                                         color: Color(
-                          //                                             0xff606F49),
-                          //                                         fontSize:
-                          //                                             12.0,
-                          //                                         fontFamily:
-                          //                                             'SFREGULAR',
-                          //                                       ),
-                          //                                     ),
-                          //                                     Text(
-                          // '${getUnits(
-                          //   ref
-                          //       .watch(
-                          //           goosegridState)
-                          //       .messages[
-                          //           i]
-                          //       .body
-                          //       .toString(),
-                          // )}',
-                          //                                       style:
-                          //                                           const TextStyle(
-                          //                                         color: Color(
-                          //                                             0xff606F49),
-                          //                                         fontSize:
-                          //                                             25.0,
-                          //                                         fontFamily:
-                          //                                             'SFBOLD',
-                          //                                       ),
-                          //                                     ),
-                          //                                   ],
-                          //                                 ),
-                          //                                 Column(
-                          //                                   // mainAxisAlignment:
-                          //                                   //     MainAxisAlignment.spaceBetween,
-                          //                                   crossAxisAlignment:
-                          //                                       CrossAxisAlignment
-                          //                                           .end,
-                          //                                   children: [
-                          //                                     const Text(
-                          //                                       'PAID AMOUNT',
-                          //                                       style:
-                          //                                           TextStyle(
-                          //                                         color: Color(
-                          //                                             0xff606F49),
-                          //                                         fontSize:
-                          //                                             12.0,
-                          //                                         fontFamily:
-                          //                                             'SFREGULAR',
-                          //                                       ),
-                          //                                     ),
-                          //                                     Text(
-                          // '${getCashAmount(
-                          //   ref
-                          //       .watch(
-                          //           goosegridState)
-                          //       .messages[
-                          //           i]
-                          //       .body
-                          //       .toString(),
-                          // )}',
-                          //                                       style:
-                          //                                           const TextStyle(
-                          //                                         color: Color(
-                          //                                             0xff606F49),
-                          //                                         fontSize:
-                          //                                             25.0,
-                          //                                         fontFamily:
-                          //                                             'SFBOLD',
-                          //                                       ),
-                          //                                     ),
-                          //                                   ],
-                          //                                 ),
-                          //                               ],
-                          //                             ),
-                          //                           ),
-                          //                           // Text(
-                          //                           //   '${getMeterNumber(
-                          //                           //     powerMessages[i].body.toString(),
-                          //                           //   )}',
-                          //                           // ),
-                          //                           // Text(
-                          //                           //   '${getToken(
-                          //                           //     powerMessages[i].body.toString(),
-                          //                           //   )}',
-                          //                           // ),
-
-                          //                           // Text(
-                          //                           // '${getUnits(
-                          //                           //   powerMessages[i].body.toString(),
-                          //                           // )}',
-                          //                           // ),
-                          //                           // Text(
-                          //                           // '${getCashAmount(
-                          //                           //   powerMessages[i].body.toString(),
-                          //                           // )}',
-                          //                           // ),
-
-                          //                           // Text(
-                          //                           //   '${getOtherCharges(
-                          //                           //     powerMessages[i].body.toString(),
-                          //                           //   )}',
-                          //                           // ),
-                          //                           const SizedBox(
-                          //                               height: 10.0),
-                          //                         ],
-                          //                       ),
-                          //                     )
-                          //                   : Container();
-                          //             },
-                          //           )
-                          //         : Container(
-                          //             margin: const EdgeInsets.only(top: 200.0),
-                          //             width: MediaQuery.of(context).size.width -
-                          //                 40,
-                          //             // height: 300.0,
-                          //             child: const Column(
-                          //               children: [
-                          //                 // Center(
-                          //                 //   child: RiveAnimation.asset(
-                          //                 //     'assets/scan.riv',
-                          //                 //   ),
-                          //                 // ),
-                          //                 Center(
-                          //                   child: Text(
-                          //                     "Scanning...",
-                          //                     style: TextStyle(
-                          //                         color: Color(0xffE9F5DB),
-                          //                         fontSize: 16.0,
-                          //                         fontFamily: 'SFBOLD'),
-                          //                   ),
-                          //                 ),
-                          //               ],
-                          //             ),
-                          //           ),
-                          //   ],
-                          // ),
-                          // const SizedBox(height: 10.0),
-
                           ref.watch(goosegridState).powerMessagesByMonth.isEmpty
                               ? Text('Empty')
                               : Column(
@@ -445,16 +253,17 @@ class _HomeState extends ConsumerState<Home> {
                                                 textAlign: TextAlign.start,
                                                 style: const TextStyle(
                                                   color: Color(0xff606F49),
-                                                  fontSize: 14.0,
+                                                  fontSize: 12.0,
                                                   fontFamily: 'SFBOLD',
                                                 ),
                                               ),
                                             ),
                                             TransactionCard(
-                                                e: e,
-                                                data: ref
-                                                    .watch(goosegridState)
-                                                    .powerMessagesByMonth),
+                                              e: e,
+                                              data: ref
+                                                  .watch(goosegridState)
+                                                  .powerMessagesByMonth,
+                                            ),
                                             Container(
                                               width: double.infinity,
                                               // height: 30.0,
@@ -853,12 +662,12 @@ class _TransactionCardState extends State<TransactionCard> {
                           textAlign: TextAlign.start,
                           style: const TextStyle(
                             color: Color(0xff606F49),
-                            fontSize: 12.0,
+                            fontSize: 11.0,
                             fontFamily: 'SFBOLD',
                           ),
                         ),
                       ),
-                      SizedBox(height: 5.0),
+                      SizedBox(height: 6.0),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20.0,
@@ -873,7 +682,7 @@ class _TransactionCardState extends State<TransactionCard> {
                                     'UNITS',
                                     style: TextStyle(
                                       fontFamily: 'SFREGULAR',
-                                      fontSize: 12.0,
+                                      fontSize: 13.0,
                                       color: Color(0xff606F49),
                                     ),
                                   ),
@@ -884,7 +693,7 @@ class _TransactionCardState extends State<TransactionCard> {
                                     style: TextStyle(
                                       fontFamily: 'SFBOLD',
                                       color: Color(0xff606F49),
-                                      fontSize: 22.0,
+                                      fontSize: 24.0,
                                     ),
                                   ),
                                 ],
@@ -896,7 +705,7 @@ class _TransactionCardState extends State<TransactionCard> {
                                     'PAID AMOUNT',
                                     style: TextStyle(
                                       fontFamily: 'SFREGULAR',
-                                      fontSize: 12.0,
+                                      fontSize: 13.0,
                                       color: Color(0xff606F49),
                                     ),
                                   ),
@@ -907,7 +716,7 @@ class _TransactionCardState extends State<TransactionCard> {
                                     style: TextStyle(
                                       fontFamily: 'SFBOLD',
                                       color: Color(0xff606F49),
-                                      fontSize: 22.0,
+                                      fontSize: 24.0,
                                     ),
                                   ),
                                 ],

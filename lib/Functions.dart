@@ -89,13 +89,15 @@ formatCashAmount(int cash) {
 formatDate(String timestamp) {
   try {
     DateTime parsedDateTime = DateTime.parse(timestamp);
-    final formatter = DateFormat('EEE, dd MMM');
+    final formatter = DateFormat('EEEE dd, h:mm a');
     final formattedString = formatter.format(parsedDateTime);
-    return formattedString.toUpperCase();
+    return formattedString;
   } catch (e) {
     return '00';
   }
 }
+
+calculateYearlySpending(List data) {}
 
 calculateTotalSpendings(List data) {
   var totalSpent = 0;

@@ -27,19 +27,19 @@ class _InsightState extends ConsumerState<Insight> {
         Icon(
           CupertinoIcons.bolt_fill,
           size: 120.0,
-          color: Color(0xffE9F5DB),
+          color: Color(0xffE9F5DB).withOpacity(0.5),
         ),
         SizedBox(height: 30.0),
         Container(
           width: double.infinity,
-          margin: EdgeInsets.symmetric(horizontal: 15.0),
-          padding: EdgeInsets.all(18.0),
+          margin: EdgeInsets.symmetric(horizontal: 5.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           decoration: BoxDecoration(
             color: Color(0xffE9F5DB).withOpacity(0.1),
             borderRadius: BorderRadius.circular(10.0),
             border: Border.all(
               color: Color(0xffE9F5DB).withOpacity(0.06),
-              width: 2.0,
+              width: 1.0,
             ),
           ),
           child: Row(
@@ -49,7 +49,7 @@ class _InsightState extends ConsumerState<Insight> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "UNITS PER DAY",
+                    "UNITS USED DAILY",
                     style: TextStyle(
                       fontSize: 10.0,
                       fontFamily: 'SFREGULAR',
@@ -89,7 +89,7 @@ class _InsightState extends ConsumerState<Insight> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "UNITS PER DAY",
+                    "MONTHLY SPENDINGS",
                     style: TextStyle(
                       fontSize: 10.0,
                       fontFamily: 'SFREGULAR',
@@ -116,6 +116,50 @@ class _InsightState extends ConsumerState<Insight> {
                     ],
                   ),
                 ],
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 10.0),
+        Container(
+          width: double.infinity,
+          margin: EdgeInsets.symmetric(horizontal: 5.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          decoration: BoxDecoration(
+            color: Color(0xffE9F5DB).withOpacity(0.1),
+            borderRadius: BorderRadius.circular(10.0),
+            border: Border.all(
+              color: Color(0xffE9F5DB).withOpacity(0.06),
+              width: 1.0,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "In September, 2024",
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontFamily: 'SFBOLD',
+                  color: Color(0xffE9F5DB),
+                ),
+              ),
+              Text(
+                "You used the highest amount of units this year",
+                style: TextStyle(
+                  fontSize: 12.0,
+                  fontFamily: 'SFREGULAR',
+                  color: Color(0xffE9F5DB).withOpacity(0.6),
+                ),
+              ),
+              SizedBox(height: 10.0),
+              Text(
+                "70.5",
+                style: TextStyle(
+                  fontSize: 50.0,
+                  fontFamily: 'SFBOLD',
+                  color: Color(0xffE9F5DB),
+                ),
               ),
             ],
           ),
