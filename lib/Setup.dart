@@ -141,12 +141,12 @@ class _SetupState extends ConsumerState<Setup> {
     return AnnotatedRegion(
       value: const SystemUiOverlayStyle(
         systemNavigationBarContrastEnforced: false,
-        systemNavigationBarColor: Color(0xff4c7766),
-        systemNavigationBarDividerColor: Color(0xff4c7766),
-        statusBarColor: Color(0xff4c7766),
+        systemNavigationBarColor: Color(0xff606F49),
+        systemNavigationBarDividerColor: Color(0xff606F49),
+        statusBarColor: Color(0xff606F49),
       ),
       child: Scaffold(
-        backgroundColor: const Color(0xff4c7766),
+        backgroundColor: const Color(0xff606F49),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -236,7 +236,7 @@ class _SetupState extends ConsumerState<Setup> {
                                 child: const Text(
                                   "Allow Access",
                                   style: TextStyle(
-                                    color: Color(0xff4c7766),
+                                    color: Color(0xff606F49),
                                     fontFamily: 'SFBOLD',
                                     fontSize: 16.0,
                                   ),

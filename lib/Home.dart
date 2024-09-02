@@ -1,8 +1,12 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goosegrid/Functions.dart';
+import 'package:goosegrid/Insight.dart';
 import 'package:goosegrid/riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -22,6 +26,13 @@ class _HomeState extends ConsumerState<Home> {
   void initState() {
     // TODO: implement initState
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print("Disposing - home");
   }
 
   @override
@@ -539,20 +550,9 @@ class _HomeState extends ConsumerState<Home> {
                         ],
                       )
                     : SizedBox(
-                        height: MediaQuery.of(context).size.height,
+                        // height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "This page is under construction",
-                              style: TextStyle(
-                                  color: Color(0xffE9F5DB),
-                                  fontSize: 16.0,
-                                  fontFamily: 'SFBOLD'),
-                            ),
-                          ],
-                        ),
+                        child: Insight(),
                       ),
               ),
             ),
@@ -577,7 +577,9 @@ class TransactionCard extends StatefulWidget {
 }
 
 class _TransactionCardState extends State<TransactionCard> {
-  infoModal(context, date, units, paidAmount, charges, tokenAmount) {
+  var clipboardMessage = 'Copy Token';
+
+  infoModal(context, date, units, paidAmount, charges, tokenAmount, token) {
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -753,6 +755,44 @@ class _TransactionCardState extends State<TransactionCard> {
                     ),
                   ),
                   const SizedBox(height: 10.0),
+                  Container(
+                    width: double.infinity,
+                    child: CupertinoButton(
+                      color: const Color(0xffE9F5DB),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            CupertinoIcons.doc_on_clipboard,
+                            color: Color(0xff606F49),
+                            size: 15.0,
+                          ),
+                          SizedBox(width: 10.0),
+                          Text(
+                            '$clipboardMessage',
+                            style: TextStyle(
+                              fontFamily: 'SFBOLD',
+                              fontSize: 16.0,
+                              color: Color(0xff606F49),
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Clipboard.setData(ClipboardData(text: token));
+                        setState(() {
+                          clipboardMessage = 'Copied';
+                        });
+
+                        var timer = Timer(
+                          const Duration(seconds: 2),
+                          () => setState(() {
+                            clipboardMessage = 'Copy Token';
+                          }),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -786,6 +826,7 @@ class _TransactionCardState extends State<TransactionCard> {
                     getCashAmount(item['body']),
                     getOtherCharges(item['body']),
                     getTokenAmount(item['body']),
+                    getToken(item['body']),
                   );
                 },
                 child: Container(
