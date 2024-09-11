@@ -24,13 +24,13 @@ class _SettingsState extends ConsumerState<Settings> {
         backgroundColor: const Color(0xff606F49),
         appBar: AppBar(
           leading: Container(
-            margin: EdgeInsets.only(left: 20.0),
+            margin: const EdgeInsets.only(left: 20.0),
             child: IconButton(
-              padding: EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 CupertinoIcons.chevron_back,
                 size: 24.0,
                 color: Color(0xffE9F5DB),

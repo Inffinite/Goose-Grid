@@ -89,7 +89,7 @@ formatCashAmount(int cash) {
 formatDate(String timestamp) {
   try {
     DateTime parsedDateTime = DateTime.parse(timestamp);
-    final formatter = DateFormat('EEEE dd, h:mm a');
+    final formatter = DateFormat('EEEE dd, h:mma');
     final formattedString = formatter.format(parsedDateTime);
     return formattedString;
   } catch (e) {

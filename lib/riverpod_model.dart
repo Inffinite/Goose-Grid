@@ -58,8 +58,6 @@ class RiverpodModel extends ChangeNotifier {
 
     powerMessagesByMonth = mydata;
     log("Monthly transactions: ${powerMessagesByMonth[0].length}");
-    print(mydata);
-    // print(mydata[0][0]['date']);
 
     DateTime now = DateTime.now();
     final formatter = DateFormat('yM');

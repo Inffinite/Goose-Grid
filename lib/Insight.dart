@@ -16,7 +16,6 @@ class _InsightState extends ConsumerState<Insight> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    print("Disposing - insight");
   }
 
   @override
@@ -27,18 +26,18 @@ class _InsightState extends ConsumerState<Insight> {
         Icon(
           CupertinoIcons.bolt_fill,
           size: 120.0,
-          color: Color(0xffE9F5DB).withOpacity(0.5),
+          color: const Color(0xffE9F5DB).withOpacity(0.5),
         ),
-        SizedBox(height: 30.0),
+        const SizedBox(height: 30.0),
         Container(
           width: double.infinity,
-          margin: EdgeInsets.symmetric(horizontal: 5.0),
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           decoration: BoxDecoration(
-            color: Color(0xffE9F5DB).withOpacity(0.1),
+            color: const Color(0xffE9F5DB).withOpacity(0.1),
             borderRadius: BorderRadius.circular(10.0),
             border: Border.all(
-              color: Color(0xffE9F5DB).withOpacity(0.06),
+              color: const Color(0xffE9F5DB).withOpacity(0.06),
               width: 1.0,
             ),
           ),
@@ -53,7 +52,7 @@ class _InsightState extends ConsumerState<Insight> {
                     style: TextStyle(
                       fontSize: 10.0,
                       fontFamily: 'SFREGULAR',
-                      color: Color(0xffE9F5DB).withOpacity(0.6),
+                      color: const Color(0xffE9F5DB).withOpacity(0.6),
                     ),
                   ),
                   Row(
@@ -62,10 +61,10 @@ class _InsightState extends ConsumerState<Insight> {
                       Icon(
                         CupertinoIcons.bolt_fill,
                         size: 20.0,
-                        color: Color(0xffE9F5DB).withOpacity(0.5),
+                        color: const Color(0xffE9F5DB).withOpacity(0.5),
                       ),
-                      SizedBox(width: 5.0),
-                      Text(
+                      const SizedBox(width: 5.0),
+                      const Text(
                         "345",
                         style: TextStyle(
                           fontSize: 24.0,
@@ -82,7 +81,7 @@ class _InsightState extends ConsumerState<Insight> {
                 width: 2.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50.0),
-                  color: Color(0xffE9F5DB).withOpacity(0.2),
+                  color: const Color(0xffE9F5DB).withOpacity(0.2),
                 ),
               ),
               Column(
@@ -93,7 +92,7 @@ class _InsightState extends ConsumerState<Insight> {
                     style: TextStyle(
                       fontSize: 10.0,
                       fontFamily: 'SFREGULAR',
-                      color: Color(0xffE9F5DB).withOpacity(0.6),
+                      color: const Color(0xffE9F5DB).withOpacity(0.6),
                     ),
                   ),
                   Row(
@@ -102,10 +101,10 @@ class _InsightState extends ConsumerState<Insight> {
                       Icon(
                         CupertinoIcons.bolt_fill,
                         size: 20.0,
-                        color: Color(0xffE9F5DB).withOpacity(0.5),
+                        color: const Color(0xffE9F5DB).withOpacity(0.5),
                       ),
-                      SizedBox(width: 5.0),
-                      Text(
+                      const SizedBox(width: 5.0),
+                      const Text(
                         "345",
                         style: TextStyle(
                           fontSize: 24.0,
@@ -120,23 +119,23 @@ class _InsightState extends ConsumerState<Insight> {
             ],
           ),
         ),
-        SizedBox(height: 10.0),
+        const SizedBox(height: 10.0),
         Container(
           width: double.infinity,
-          margin: EdgeInsets.symmetric(horizontal: 5.0),
-          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           decoration: BoxDecoration(
-            color: Color(0xffE9F5DB).withOpacity(0.1),
+            color: const Color(0xffE9F5DB).withOpacity(0.1),
             borderRadius: BorderRadius.circular(10.0),
             border: Border.all(
-              color: Color(0xffE9F5DB).withOpacity(0.06),
+              color: const Color(0xffE9F5DB).withOpacity(0.06),
               width: 1.0,
             ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 "In September, 2024",
                 style: TextStyle(
                   fontSize: 18.0,
@@ -149,11 +148,11 @@ class _InsightState extends ConsumerState<Insight> {
                 style: TextStyle(
                   fontSize: 12.0,
                   fontFamily: 'SFREGULAR',
-                  color: Color(0xffE9F5DB).withOpacity(0.6),
+                  color: const Color(0xffE9F5DB).withOpacity(0.6),
                 ),
               ),
-              SizedBox(height: 10.0),
-              Text(
+              const SizedBox(height: 10.0),
+              const Text(
                 "70.5",
                 style: TextStyle(
                   fontSize: 50.0,
