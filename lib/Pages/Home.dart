@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goosegrid/Functions.dart';
-import 'package:goosegrid/Insight.dart';
-import 'package:goosegrid/Settings.dart';
-import 'package:goosegrid/riverpod.dart';
+import 'package:goosegrid/Pages/Insight.dart';
+import 'package:goosegrid/Pages/Settings.dart';
+import 'package:goosegrid/Riverpod/riverpod.dart';
 import 'package:intl/intl.dart';
 
 class Home extends ConsumerStatefulWidget {
@@ -50,41 +50,41 @@ class _HomeState extends ConsumerState<Home> {
           backgroundColor: const Color(0xff606F49),
           appBar: AppBar(
             surfaceTintColor: Colors.black,
-            // leading: Container(
-            //   margin: EdgeInsets.only(left: 20.0),
-            //   child: IconButton(
-            //     padding: EdgeInsets.all(10.0),
-            //     onPressed: () {
-            //       // Navigator.pop(context);
-            //     },
-            //     icon: Icon(
-            //       CupertinoIcons.bolt_fill,
-            //       size: 24.0,
-            //       color: Color(0xffE9F5DB),
-            //     ),
-            //   ),
-            // ),
-            leading: Container(),
-            // actions: [
-            //   Container(
-            //     margin: EdgeInsets.only(right: 20.0),
-            //     child: IconButton(
-            //       padding: EdgeInsets.all(5.0),
-            //       onPressed: () {
-            //         Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //             builder: (context) => const Settings(),
-            //           ),
-            //         );
-            //       },
-            //       icon: Icon(
-            //         CupertinoIcons.settings_solid,
-            //         color: Color(0xffE9F5DB),
-            //       ),
-            //     ),
-            //   ),
-            // ],
+            leading: Container(
+              margin: EdgeInsets.only(left: 15.0),
+              child: IconButton(
+                padding: EdgeInsets.all(10.0),
+                onPressed: () {
+                  // Navigator.pop(context);
+                },
+                icon: Icon(
+                  CupertinoIcons.bolt_fill,
+                  size: 24.0,
+                  color: Color(0xffE9F5DB),
+                ),
+              ),
+            ),
+            // leading: Container(),
+            actions: [
+              Container(
+                margin: EdgeInsets.only(right: 15.0),
+                child: IconButton(
+                  padding: EdgeInsets.all(5.0),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Settings(),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    CupertinoIcons.settings_solid,
+                    color: Color(0xffE9F5DB),
+                  ),
+                ),
+              ),
+            ],
             backgroundColor: const Color(0xff606F49),
             title: InkWell(
               onTap: () {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:goosegrid/Setup.dart';
+import 'package:goosegrid/Pages/Setup.dart';
 
 // part 'main.g.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return const MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Goose Grid',
       debugShowCheckedModeBanner: false,
       home: Setup(),
     );
