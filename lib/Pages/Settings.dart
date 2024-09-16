@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:goosegrid/Widgets/SettingsCard.dart';
 
 class Settings extends ConsumerStatefulWidget {
   const Settings({super.key});
@@ -53,6 +54,51 @@ class _SettingsState extends ConsumerState<Settings> {
             ),
           ),
           centerTitle: true,
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 15.0,
+              ),
+              child: Column(
+                children: [
+                  // SettingsCard(
+                  //   icon: CupertinoIcons.star_fill,
+                  //   iconSize: 22.0,
+                  //   settingTitle: 'Hidden feature',
+                  //   settingSubtitle:
+                  //       'Leave a review',
+                  //   action: () {},
+                  // ),
+                  SettingsCard(
+                    icon:
+                        CupertinoIcons.rectangle_fill_on_rectangle_angled_fill,
+                    iconSize: 20.0,
+                    settingTitle: 'Meter Number',
+                    settingSubtitle: 'Edit your meter number',
+                    action: () {},
+                  ),
+                  SettingsCard(
+                    icon: CupertinoIcons.briefcase_fill,
+                    iconSize: 20.0,
+                    settingTitle: 'Privacy policy',
+                    settingSubtitle: 'How we handle your data',
+                    action: () {},
+                  ),
+                  SettingsCard(
+                    icon: CupertinoIcons.lock_fill,
+                    iconSize: 20.0,
+                    settingTitle: 'Security',
+                    settingSubtitle: 'Control who has access',
+                    action: () {},
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

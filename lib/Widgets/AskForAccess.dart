@@ -47,6 +47,7 @@ class AskForAccess extends StatelessWidget {
           CupertinoButton(
             borderRadius: BorderRadius.circular(50.0),
             color: const Color(0xffebe6e0),
+            onPressed: allow,
             child: const Text(
               "Allow Access",
               style: TextStyle(
@@ -55,11 +56,11 @@ class AskForAccess extends StatelessWidget {
                 fontSize: 16.0,
               ),
             ),
-            onPressed: allow,
           ),
           const SizedBox(height: 10.0),
           CupertinoButton(
             borderRadius: BorderRadius.circular(50.0),
+            onPressed: deny,
             // color: Color(0xffebe6e0),
             child: const Text(
               "Deny Access",
@@ -69,7 +70,6 @@ class AskForAccess extends StatelessWidget {
                 fontSize: 14.0,
               ),
             ),
-            onPressed: deny,
           ),
         ],
       ),

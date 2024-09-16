@@ -9,6 +9,7 @@ import 'package:goosegrid/Functions.dart';
 import 'package:goosegrid/Pages/Insight.dart';
 import 'package:goosegrid/Pages/Settings.dart';
 import 'package:goosegrid/Riverpod/riverpod.dart';
+import 'package:goosegrid/Widgets/TransactionCard.dart';
 import 'package:intl/intl.dart';
 
 class Home extends ConsumerStatefulWidget {
@@ -35,6 +36,134 @@ class _HomeState extends ConsumerState<Home> {
     super.dispose();
   }
 
+  timeModal(context) {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+        top: Radius.circular(15.0),
+      )),
+      isScrollControlled: true,
+      backgroundColor: const Color(0xff606F49),
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(builder: (context, StateSetter setState) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 30.0,
+                        height: 4.0,
+                        margin: const EdgeInsets.only(top: 15.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50.0),
+                          color: const Color(0xffE9F5DB),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20.0),
+                  Container(
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        'Pick a timeline',
+                        style: TextStyle(
+                          fontFamily: 'SFBOLD',
+                          fontSize: 16.0,
+                          color: const Color(0xffE9F5DB),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Column(
+                    children: [
+                      InkWell(
+                        borderRadius: BorderRadius.circular(5.0),
+                        onTap: () {
+                          setState(() {
+                            ref.read(goosegridState).changeTotalType();
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 0.0,
+                            vertical: 15.0,
+                          ),
+                          decoration: BoxDecoration(
+                            color: ref.watch(goosegridState).totalType == 0
+                                ? const Color(0xffE9F5DB)
+                                : const Color(0xffE9F5DB).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          child: Center(
+                              child: Text(
+                            'This Month',
+                            style: TextStyle(
+                              fontFamily: 'SFMEDIUM',
+                              fontSize: 16.0,
+                              color: ref.watch(goosegridState).totalType == 0
+                                  ? Color(0xff606F49)
+                                  : const Color(0xffE9F5DB),
+                            ),
+                          )),
+                        ),
+                      ),
+                      SizedBox(height: 10.0),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(5.0),
+                        onTap: () {
+                          setState(() {
+                            ref.read(goosegridState).changeTotalType();
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 0.0,
+                              vertical: 15.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: ref.watch(goosegridState).totalType == 1
+                                  ? const Color(0xffE9F5DB)
+                                  : const Color(0xffE9F5DB).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: Center(
+                                child: Text(
+                              'This Year',
+                              style: TextStyle(
+                                fontFamily: 'SFMEDIUM',
+                                fontSize: 16.0,
+                                color: ref.watch(goosegridState).totalType == 1
+                                    ? Color(0xff606F49)
+                                    : const Color(0xffE9F5DB),
+                              ),
+                            ))),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10.0),
+                ],
+              ),
+            ),
+          );
+        });
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -51,13 +180,14 @@ class _HomeState extends ConsumerState<Home> {
           appBar: AppBar(
             surfaceTintColor: Colors.black,
             leading: Container(
-              margin: EdgeInsets.only(left: 15.0),
+              margin: const EdgeInsets.only(left: 15.0),
               child: IconButton(
-                padding: EdgeInsets.all(10.0),
+                highlightColor: Colors.transparent,
+                padding: const EdgeInsets.all(10.0),
                 onPressed: () {
                   // Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   CupertinoIcons.bolt_fill,
                   size: 24.0,
                   color: Color(0xffE9F5DB),
@@ -67,9 +197,10 @@ class _HomeState extends ConsumerState<Home> {
             // leading: Container(),
             actions: [
               Container(
-                margin: EdgeInsets.only(right: 15.0),
+                margin: const EdgeInsets.only(right: 15.0),
                 child: IconButton(
-                  padding: EdgeInsets.all(5.0),
+                  highlightColor: Colors.transparent,
+                  padding: const EdgeInsets.all(5.0),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -78,7 +209,7 @@ class _HomeState extends ConsumerState<Home> {
                       ),
                     );
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     CupertinoIcons.settings_solid,
                     color: Color(0xffE9F5DB),
                   ),
@@ -144,10 +275,12 @@ class _HomeState extends ConsumerState<Home> {
           // ),
           body: SafeArea(
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 15.0),
+                  horizontal: 20.0,
+                  vertical: 15.0,
+                ),
                 child: selectedPage == 0
                     ? Column(
                         children: [
@@ -174,7 +307,9 @@ class _HomeState extends ConsumerState<Home> {
                               ),
                               const SizedBox(width: 10.0),
                               Text(
-                                '${formatCashAmount(ref.watch(goosegridState).powerSpendingThisMonth)}',
+                                ref.watch(goosegridState).totalType == 1
+                                    ? '${formatCashAmount(ref.watch(goosegridState).powerSpendingThisYear)}'
+                                    : '${formatCashAmount(ref.watch(goosegridState).powerSpendingThisMonth)}',
                                 style: const TextStyle(
                                   fontSize: 45.0,
                                   color: Color(0xffE9F5DB),
@@ -184,32 +319,41 @@ class _HomeState extends ConsumerState<Home> {
                             ],
                           ),
                           const SizedBox(height: 10.0),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 10.0),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50.0),
-                              color: const Color(0xffE9F5DB).withOpacity(0.05),
-                            ),
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'THIS MONTH',
-                                  style: TextStyle(
-                                    fontSize: 12.0,
-                                    color: Color(0xffE9F5DB),
-                                    fontFamily: 'SFBOLD',
+                          InkWell(
+                            borderRadius: BorderRadius.circular(50.0),
+                            onTap: () {
+                              timeModal(context);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15.0, vertical: 5.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: const Color(0xffE9F5DB).withOpacity(0.1),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    ref.watch(goosegridState).totalType == 0
+                                        ? 'This Month'
+                                        : 'This Year',
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      color: Color(0xffE9F5DB),
+                                      fontFamily: 'SFBOLD',
+                                    ),
                                   ),
-                                ),
-                                // SizedBox(width: 5.0),
-                                // Icon(
-                                //   Icons.keyboard_arrow_down,
-                                //   size: 25.0,
-                                //   color: Color(0xff606F49),
-                                // ),
-                              ],
+                                  SizedBox(width: 5.0),
+                                  Icon(
+                                    Icons.keyboard_arrow_down,
+                                    size: 25.0,
+                                    color: Color(0xffE9F5DB),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(height: 30.0),
@@ -292,73 +436,70 @@ class _HomeState extends ConsumerState<Home> {
                                                   horizontal: 20.0,
                                                 ),
                                                 child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            'TOTAL UNITS',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'SFREGULAR',
-                                                              fontSize: 12.0,
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(
-                                                                0.5,
-                                                              ),
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          'TOTAL UNITS',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'SFREGULAR',
+                                                            fontSize: 12.0,
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                              0.5,
                                                             ),
                                                           ),
-                                                          Text(
-                                                            '${calculateTotalUnits(e)}',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontFamily:
-                                                                  'SFBOLD',
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 22.0,
+                                                        ),
+                                                        Text(
+                                                          '${calculateTotalUnits(e)}',
+                                                          style:
+                                                              const TextStyle(
+                                                            fontFamily:
+                                                                'SFBOLD',
+                                                            color: Colors.white,
+                                                            fontSize: 22.0,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'TOTAL SPENT',
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                'SFREGULAR',
+                                                            fontSize: 12.0,
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                              0.5,
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            'TOTAL SPENT',
-                                                            style: TextStyle(
-                                                              fontFamily:
-                                                                  'SFREGULAR',
-                                                              fontSize: 12.0,
-                                                              color: Colors
-                                                                  .white
-                                                                  .withOpacity(
-                                                                0.5,
-                                                              ),
-                                                            ),
+                                                        ),
+                                                        Text(
+                                                          '${calculateTotalSpendings(e)}',
+                                                          style:
+                                                              const TextStyle(
+                                                            fontFamily:
+                                                                'SFBOLD',
+                                                            color: Colors.white,
+                                                            fontSize: 22.0,
                                                           ),
-                                                          Text(
-                                                            '${calculateTotalSpendings(e)}',
-                                                            style:
-                                                                const TextStyle(
-                                                              fontFamily:
-                                                                  'SFBOLD',
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 22.0,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ]),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -379,366 +520,5 @@ class _HomeState extends ConsumerState<Home> {
         ),
       ),
     );
-  }
-}
-
-class TransactionCard extends StatefulWidget {
-  final e;
-  final List data;
-
-  const TransactionCard({
-    super.key,
-    required this.e,
-    required this.data,
-  });
-
-  @override
-  State<TransactionCard> createState() => _TransactionCardState();
-}
-
-class _TransactionCardState extends State<TransactionCard> {
-  var clipboardMessage = 'Copy Token';
-
-  infoModal(context, date, units, paidAmount, charges, tokenAmount, token) {
-    showModalBottomSheet(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-        top: Radius.circular(15.0),
-      )),
-      isScrollControlled: true,
-      backgroundColor: const Color(0xff606F49),
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(builder: (context, StateSetter setState) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 30.0,
-                        height: 4.0,
-                        margin: const EdgeInsets.only(top: 15.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50.0),
-                          color: const Color(0xffE9F5DB),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20.0),
-                  SizedBox(
-                    width: double.infinity,
-                    child: Center(
-                      child: Text(
-                        '$date',
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Color(0xffE9F5DB),
-                          fontSize: 14.0,
-                          fontFamily: 'SFBOLD',
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10.0),
-                  Container(
-                    width: double.infinity,
-                    // margin: const EdgeInsets.only(
-                    //   bottom: 20.0,
-                    // ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 0.0,
-                      vertical: 10.0,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xffE9F5DB),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'UNITS',
-                                    style: TextStyle(
-                                      fontFamily: 'SFREGULAR',
-                                      fontSize: 12.0,
-                                      color: Color(0xff606F49),
-                                    ),
-                                  ),
-                                  Text(
-                                    '$units',
-                                    style: const TextStyle(
-                                      fontFamily: 'SFBOLD',
-                                      color: Color(0xff606F49),
-                                      fontSize: 25.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const Text(
-                                    'PAID AMOUNT',
-                                    style: TextStyle(
-                                      fontFamily: 'SFREGULAR',
-                                      fontSize: 12.0,
-                                      color: Color(0xff606F49),
-                                    ),
-                                  ),
-                                  Text(
-                                    '$paidAmount',
-                                    style: const TextStyle(
-                                      fontFamily: 'SFBOLD',
-                                      color: Color(0xff606F49),
-                                      fontSize: 25.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          color: const Color(0xff606F49).withOpacity(0.2),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'OTHER CHARGES',
-                                    style: TextStyle(
-                                      fontFamily: 'SFREGULAR',
-                                      fontSize: 12.0,
-                                      color: Color(0xff606F49),
-                                    ),
-                                  ),
-                                  Text(
-                                    '$charges',
-                                    style: const TextStyle(
-                                      fontFamily: 'SFBOLD',
-                                      color: Color(0xff606F49),
-                                      fontSize: 25.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const Text(
-                                    'AMOUNT USED',
-                                    style: TextStyle(
-                                      fontFamily: 'SFREGULAR',
-                                      fontSize: 12.0,
-                                      color: Color(0xff606F49),
-                                    ),
-                                  ),
-                                  Text(
-                                    '$tokenAmount',
-                                    style: const TextStyle(
-                                      fontFamily: 'SFBOLD',
-                                      color: Color(0xff606F49),
-                                      fontSize: 25.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10.0),
-                  SizedBox(
-                    width: double.infinity,
-                    child: CupertinoButton(
-                      color: const Color(0xffE9F5DB),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            CupertinoIcons.doc_on_clipboard,
-                            color: Color(0xff606F49),
-                            size: 15.0,
-                          ),
-                          const SizedBox(width: 10.0),
-                          Text(
-                            clipboardMessage,
-                            style: const TextStyle(
-                              fontFamily: 'SFBOLD',
-                              fontSize: 16.0,
-                              color: Color(0xff606F49),
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: () {
-                        Clipboard.setData(ClipboardData(text: token));
-                        setState(() {
-                          clipboardMessage = 'Copied';
-                        });
-
-                        var timer = Timer(
-                          const Duration(seconds: 2),
-                          () => setState(() {
-                            clipboardMessage = 'Copy Token';
-                          }),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.only(bottom: 0.0),
-        padding: const EdgeInsets.only(bottom: 10.0),
-        decoration: const BoxDecoration(
-          color: Color(0xffE9F5DB),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(5.0),
-            topRight: Radius.circular(5.0),
-          ),
-        ),
-        child: Column(
-          children: [
-            for (Map<String, dynamic> item in widget.e)
-              InkWell(
-                onTap: () {
-                  infoModal(
-                    context,
-                    formatDate(item['date'].toString()),
-                    getUnits(item['body']),
-                    getCashAmount(item['body']),
-                    getOtherCharges(item['body']),
-                    getTokenAmount(item['body']),
-                    getToken(item['body']),
-                  );
-                },
-                child: Container(
-                  width: double.infinity,
-                  // margin: const EdgeInsets.only(
-                  //   bottom: 20.0,
-                  // ),
-                  padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                  decoration: const BoxDecoration(
-                    color: Color(0xffE9F5DB),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Divider(
-                        color: Color.fromARGB(66, 85, 99, 64),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                        ),
-                        child: Text(
-                          '${formatDate(item['date'].toString())}',
-                          textAlign: TextAlign.start,
-                          style: const TextStyle(
-                            color: Color(0xff606F49),
-                            fontSize: 11.0,
-                            fontFamily: 'SFBOLD',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 6.0),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0,
-                        ),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'UNITS',
-                                    style: TextStyle(
-                                      fontFamily: 'SFREGULAR',
-                                      fontSize: 13.0,
-                                      color: Color(0xff606F49),
-                                    ),
-                                  ),
-                                  Text(
-                                    '${getUnits(
-                                      item['body'],
-                                    )}',
-                                    style: const TextStyle(
-                                      fontFamily: 'SFBOLD',
-                                      color: Color(0xff606F49),
-                                      fontSize: 24.0,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  const Text(
-                                    'PAID AMOUNT',
-                                    style: TextStyle(
-                                      fontFamily: 'SFREGULAR',
-                                      fontSize: 13.0,
-                                      color: Color(0xff606F49),
-                                    ),
-                                  ),
-                                  Text(
-                                    '${getCashAmount(
-                                      item['body'],
-                                    )}',
-                                    style: const TextStyle(
-                                      fontFamily: 'SFBOLD',
-                                      color: Color(0xff606F49),
-                                      fontSize: 24.0,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            ]),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-          ],
-        ));
   }
 }

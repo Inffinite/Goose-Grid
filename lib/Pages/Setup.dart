@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
-import 'package:goosegrid/Pages/Denyed.dart';
 import 'package:goosegrid/Widgets/AskForAccess.dart';
 import 'package:goosegrid/Pages/Home.dart';
+import 'package:goosegrid/Widgets/Denyed.dart';
+import 'package:goosegrid/Widgets/Loading.dart';
 import 'package:goosegrid/Widgets/Scanning.dart';
 import 'package:goosegrid/Riverpod/riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -46,6 +46,7 @@ class _SetupState extends ConsumerState<Setup> {
 
     log('FETCHED: ${powerMessages.length} kplc messages');
     ref.read(goosegridState).arrangeMessagesByMonth();
+    ref.read(goosegridState).arrangeMessagesByYear();
   }
 
   getData() async {
@@ -67,6 +68,9 @@ class _SetupState extends ConsumerState<Setup> {
 
     ref.read(goosegridState).changeMessages(powerMessages);
     ref.read(goosegridState).arrangeMessagesByMonth();
+    ref.read(goosegridState).arrangeMessagesByYear();
+
+    return true;
   }
 
   checkPermission() async {
@@ -74,14 +78,15 @@ class _SetupState extends ConsumerState<Setup> {
 
     if (status == PermissionStatus.granted) {
       await getData();
-      var timer = Timer(
-          const Duration(seconds: 8),
-          () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Home(),
-                ),
-              ));
+      Timer(
+        const Duration(seconds: 10),
+        () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Home(),
+          ),
+        ),
+      );
 
       // setState(() {
       //   permissionGranted = true;
@@ -150,17 +155,7 @@ class _SetupState extends ConsumerState<Setup> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            proceed == false
-                ? SizedBox(
-                    width: MediaQuery.of(context).size.width - 40,
-                    height: 300.0,
-                    child: const Center(
-                      child: RiveAnimation.asset(
-                        'assets/scan.riv',
-                      ),
-                    ),
-                  )
-                : Container(),
+            proceed == false ? const Loading() : Container(),
             denyed == true && proceed == true
                 ? const Denyed()
                 : permissionGranted == false && proceed == true

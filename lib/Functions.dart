@@ -97,7 +97,9 @@ formatDate(String timestamp) {
   }
 }
 
-calculateYearlySpending(List data) {}
+// calculateYearlySpending(List data) {
+
+// }
 
 calculateTotalSpendings(List data) {
   var totalSpent = 0;
