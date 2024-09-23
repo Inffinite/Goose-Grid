@@ -65,22 +65,6 @@ class _SettingsState extends ConsumerState<Settings> {
               ),
               child: Column(
                 children: [
-                  // SettingsCard(
-                  //   icon: CupertinoIcons.star_fill,
-                  //   iconSize: 22.0,
-                  //   settingTitle: 'Hidden feature',
-                  //   settingSubtitle:
-                  //       'Leave a review',
-                  //   action: () {},
-                  // ),
-                  SettingsCard(
-                    icon:
-                        CupertinoIcons.rectangle_fill_on_rectangle_angled_fill,
-                    iconSize: 20.0,
-                    settingTitle: 'Meter Number',
-                    settingSubtitle: 'Edit your meter number',
-                    action: () {},
-                  ),
                   SettingsCard(
                     icon: CupertinoIcons.briefcase_fill,
                     iconSize: 20.0,
@@ -91,8 +75,8 @@ class _SettingsState extends ConsumerState<Settings> {
                   SettingsCard(
                     icon: CupertinoIcons.lock_fill,
                     iconSize: 20.0,
-                    settingTitle: 'Security',
-                    settingSubtitle: 'Control who has access',
+                    settingTitle: 'About',
+                    settingSubtitle: 'More information about goose grid',
                     action: () {},
                   ),
                 ],

@@ -12,7 +12,6 @@ import 'package:goosegrid/Widgets/Loading.dart';
 import 'package:goosegrid/Widgets/Scanning.dart';
 import 'package:goosegrid/Riverpod/riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:rive/rive.dart';
 
 class Setup extends ConsumerStatefulWidget {
   const Setup({super.key});

@@ -70,15 +70,15 @@ class _HomeState extends ConsumerState<Home> {
                     ],
                   ),
                   const SizedBox(height: 20.0),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'Pick a timeline',
                         style: TextStyle(
                           fontFamily: 'SFBOLD',
                           fontSize: 16.0,
-                          color: const Color(0xffE9F5DB),
+                          color: Color(0xffE9F5DB),
                         ),
                       ),
                     ),
@@ -113,13 +113,13 @@ class _HomeState extends ConsumerState<Home> {
                               fontFamily: 'SFMEDIUM',
                               fontSize: 16.0,
                               color: ref.watch(goosegridState).totalType == 0
-                                  ? Color(0xff606F49)
+                                  ? const Color(0xff606F49)
                                   : const Color(0xffE9F5DB),
                             ),
                           )),
                         ),
                       ),
-                      SizedBox(height: 10.0),
+                      const SizedBox(height: 10.0),
                       InkWell(
                         borderRadius: BorderRadius.circular(5.0),
                         onTap: () {
@@ -147,14 +147,14 @@ class _HomeState extends ConsumerState<Home> {
                                 fontFamily: 'SFMEDIUM',
                                 fontSize: 16.0,
                                 color: ref.watch(goosegridState).totalType == 1
-                                    ? Color(0xff606F49)
+                                    ? const Color(0xff606F49)
                                     : const Color(0xffE9F5DB),
                               ),
                             ))),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10.0),
+                  const SizedBox(height: 20.0),
                 ],
               ),
             ),
@@ -217,18 +217,12 @@ class _HomeState extends ConsumerState<Home> {
               ),
             ],
             backgroundColor: const Color(0xff606F49),
-            title: InkWell(
-              onTap: () {
-                // arrangeMessagesByDay();
-                // arrangeMessagesByMonth();
-              },
-              child: const Text(
-                "GOOSE GRID",
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Color(0xffE9F5DB),
-                  fontFamily: 'SFBOLD',
-                ),
+            title: const Text(
+              "Goose Grid",
+              style: TextStyle(
+                fontSize: 18.0,
+                color: Color(0xffE9F5DB),
+                fontFamily: 'SFBOLD',
               ),
             ),
             centerTitle: true,
@@ -340,14 +334,14 @@ class _HomeState extends ConsumerState<Home> {
                                     ref.watch(goosegridState).totalType == 0
                                         ? 'This Month'
                                         : 'This Year',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 12.0,
                                       color: Color(0xffE9F5DB),
                                       fontFamily: 'SFBOLD',
                                     ),
                                   ),
-                                  SizedBox(width: 5.0),
-                                  Icon(
+                                  const SizedBox(width: 5.0),
+                                  const Icon(
                                     Icons.keyboard_arrow_down,
                                     size: 25.0,
                                     color: Color(0xffE9F5DB),

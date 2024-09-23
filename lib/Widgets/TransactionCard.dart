@@ -72,12 +72,12 @@ class _TransactionCardState extends State<TransactionCard> {
                   ),
                   const SizedBox(height: 20.0),
                   Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 15.0,
                       vertical: 15.0,
                     ),
                     decoration: BoxDecoration(
-                      color: Color(0xff556340),
+                      color: const Color(0xff556340),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: Center(
@@ -86,7 +86,7 @@ class _TransactionCardState extends State<TransactionCard> {
                         style: TextStyle(
                           letterSpacing: 1.5,
                           fontFamily: 'SFMEDIUM',
-                          color: Color(0xffE9F5DB).withOpacity(0.8),
+                          color: const Color(0xffE9F5DB).withOpacity(0.8),
                           fontSize: 16.0,
                         ),
                       ),
@@ -258,6 +258,7 @@ class _TransactionCardState extends State<TransactionCard> {
                       },
                     ),
                   ),
+                  const SizedBox(height: 20.0),
                 ],
               ),
             ),

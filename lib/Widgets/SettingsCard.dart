@@ -31,7 +31,7 @@ class SettingsCard extends StatelessWidget {
             ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: Color(0xff97A97C).withOpacity(0.2),
+              color: const Color(0xff97A97C).withOpacity(0.2),
               // border: Border.all(
               //   color: Color(0xffE9F5DB).withOpacity(0.1), // Set the border color
               //   width: 2.0, // Set the border width
@@ -46,15 +46,15 @@ class SettingsCard extends StatelessWidget {
                     Icon(
                       icon,
                       size: iconSize,
-                      color: Color(0xffE9F5DB),
+                      color: const Color(0xffE9F5DB),
                     ),
-                    SizedBox(width: 15.0),
+                    const SizedBox(width: 15.0),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           settingTitle,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xffE9F5DB),
                             fontFamily: 'SFBOLD',
                             fontSize: 16.0,
@@ -63,7 +63,7 @@ class SettingsCard extends StatelessWidget {
                         Text(
                           settingSubtitle,
                           style: TextStyle(
-                            color: Color(0xffE9F5DB).withOpacity(0.5),
+                            color: const Color(0xffE9F5DB).withOpacity(0.5),
                             fontFamily: 'SFREGULAR',
                             fontSize: 14.0,
                           ),
@@ -77,7 +77,7 @@ class SettingsCard extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 15.0),
+        const SizedBox(height: 15.0),
       ],
     );
   }
