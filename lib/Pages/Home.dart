@@ -179,22 +179,22 @@ class _HomeState extends ConsumerState<Home> {
           backgroundColor: const Color(0xff606F49),
           appBar: AppBar(
             surfaceTintColor: Colors.black,
-            leading: Container(
-              margin: const EdgeInsets.only(left: 15.0),
-              child: IconButton(
-                highlightColor: Colors.transparent,
-                padding: const EdgeInsets.all(10.0),
-                onPressed: () {
-                  // Navigator.pop(context);
-                },
-                icon: const Icon(
-                  CupertinoIcons.bolt_fill,
-                  size: 24.0,
-                  color: Color(0xffE9F5DB),
-                ),
-              ),
-            ),
-            // leading: Container(),
+            // leading: Container(
+            //   margin: const EdgeInsets.only(left: 15.0),
+            //   child: IconButton(
+            //     highlightColor: Colors.transparent,
+            //     padding: const EdgeInsets.all(10.0),
+            //     onPressed: () {
+            //       // Navigator.pop(context);
+            //     },
+            //     icon: const Icon(
+            //       CupertinoIcons.bolt_fill,
+            //       size: 24.0,
+            //       color: Color(0xffE9F5DB),
+            //     ),
+            //   ),
+            // ),
+            leading: Container(),
             actions: [
               Container(
                 margin: const EdgeInsets.only(right: 15.0),
